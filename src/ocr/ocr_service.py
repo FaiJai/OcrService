@@ -1,16 +1,22 @@
 from typing import BinaryIO, Optional
 from function_timer import debug_timer
-from i_pdf_to_image_service import IPdfToImageService
+from pdf_to_image.i_pdf_to_image_service import IPdfToImageService
 from ocr.i_ocr_service import IOcrService
 from ocr.ocr_service_response_dto import (
     OcrServiceResponseItemInSinglePage,
     OcrServiceResponseItemInSingleItem,
 )
-from pdf_to_image_service import PdfToImageService
+from pdf_to_image.pdf_to_image_service import PdfToImageService
 import uuid
 import os
 from PIL import Image
 import json
+
+
+"""
+I was trying to call the ocrmac library functions directly in fastAPI application, but it was not working.
+Therefore, I had to create a separate python file to call the ocrmac library functions.
+"""
 
 
 class OcrService(IOcrService):
