@@ -1,7 +1,7 @@
 from typing import BinaryIO
 from pdf2image import convert_from_bytes, convert_from_path
 from PIL import Image
-from i_pdf_to_image_service import IPdfToImageService
+from pdf_to_image.i_pdf_to_image_service import IPdfToImageService
 
 
 class PdfToImageService(IPdfToImageService):
