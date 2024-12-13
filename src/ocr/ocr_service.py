@@ -47,12 +47,12 @@ class OcrService(IOcrService):
     @debug_timer
     def _delagate_ocr_service(
         self,
-        prefer_language: Optional[list[str]] = [],
+        prefer_language: Optional[list[str]],
     ) -> None:
         # Get the absolute path of this file
         current_file_path = os.path.abspath(__file__)
         os.system(
-            f'python {current_file_path} {self.temp_folder_path} {self.ocr_result_path} {".".join(prefer_language)}'
+            f'python {current_file_path} {self.temp_folder_path} {self.ocr_result_path} {" ".join(prefer_language or [])}'
         )
 
     @debug_timer
