@@ -3,6 +3,7 @@ from fastapi import Request, FastAPI, UploadFile
 from fastapi.responses import JSONResponse
 
 from ocr.ocr_service import OcrService
+from ocr.ocr_service_response_dto import OcrServiceResponseDTO
 
 app = FastAPI()
 
@@ -12,8 +13,32 @@ def health():
     return JSONResponse(status_code=200, content={"status": "ok"})
 
 
-@app.post("/ocr")
-def ocr(file: UploadFile, langugae_preference: Optional[list[str]] = None):
+@app.post(
+    "/ocr",
+    responses={
+        200: {
+            "description": "Success Request",
+            "content": {
+                "application/json": {"example": OcrServiceResponseDTO.Example.example}
+            },
+        },
+        500: {
+            "description": "Internal Server Error",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "code": "Fail",
+                        "detail": "Error Message",
+                    }
+                }
+            },
+        },
+    },
+)
+def ocr(
+    file: UploadFile,
+    langugae_preference: Optional[list[str]] = None,
+):
     try:
         ocr_service = OcrService()
         ocr_result = ocr_service.perform_request(file.file, langugae_preference)
