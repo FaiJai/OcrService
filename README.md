@@ -41,6 +41,8 @@ This repository integrates the ocrmac project with a FastAPI application, provid
 1. Call the API endpoint `/ocr`:
 
     - The file should be a PDF file inside form-data, with the key `files`.
+    - OR
+    - List of images inside form data, with the key `files`.
 
 2. Use Swagger:
     - Navigate to `http://127.0.0.1:8000/docs` in your browser to access the Swagger UI.
