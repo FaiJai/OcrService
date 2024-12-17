@@ -68,7 +68,7 @@ class OcrService(IOcrService):
     @debug_timer
     def _save_images_in_temp_folder(self, images: list[Image.Image]) -> None:
         for index, image in enumerate(images):
-            image.save(f"{self.temp_folder_path}/page_{index+1}.png")
+            image.save(f"{self.temp_folder_path}/page_{index+1:05}.png")
 
     @debug_timer
     def _delete_temp_folder(self) -> None:
@@ -110,14 +110,19 @@ class OcrServiceStartFromTerminal:
 
         recognized_texts = list()
 
+        print(image_paths)
+
         for index, image_path in enumerate(image_paths):
             # Perform OCR on the image
+            annotations = self._single_page_ocr(
+                image_path, language_preference=language_preference
+            )
+
             recognized_texts.append(
                 OcrServiceResponseItemInSinglePage(
                     page_number=index + 1,
-                    result=self._single_page_ocr(
-                        image_path, language_preference=language_preference
-                    ),
+                    result=annotations,
+                    raw_text=" ".join([annotation.text for annotation in annotations]),
                 )
             )
 
@@ -141,11 +146,13 @@ class OcrServiceStartFromTerminal:
 
     @debug_timer
     def _get_image_paths_under_folder(self, folder_path: str):
-        return [
-            os.path.join(folder_path, file_name)
-            for file_name in os.listdir(folder_path)
-            if file_name.endswith((".png", ".jpg"))
-        ]
+        return sorted(
+            [
+                os.path.join(folder_path, file_name)
+                for file_name in os.listdir(folder_path)
+                if file_name.endswith((".png", ".jpg"))
+            ]
+        )
 
     @debug_timer
     def _single_page_ocr(
