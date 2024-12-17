@@ -19,7 +19,7 @@ Therefore, I had to create a separate python file to call the ocrmac library fun
 """
 
 
-class OcrService(IOcrService):
+class PdfOcrService(IOcrService):
 
     def __init__(self, pdf_to_image_service: Optional[IPdfToImageService] = None):
         self.pdf_to_image_service = pdf_to_image_service or PdfToImageService()
