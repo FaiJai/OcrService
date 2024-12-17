@@ -44,6 +44,7 @@ class OcrServiceResponseDTO(BaseModel):
                             "confidence": 1,
                         },
                     ],
+                    "raw_text": "@ ocrmac FastAPI",
                 },
                 {
                     "page_number": 2,
@@ -79,6 +80,7 @@ class OcrServiceResponseDTO(BaseModel):
                             "confidence": 1,
                         },
                     ],
+                    "raw_text": "# ocrmac FastAPI",
                 },
             ],
         }
@@ -93,3 +95,4 @@ class OcrServiceResponseItemInSingleItem(BaseModel):
 class OcrServiceResponseItemInSinglePage(BaseModel):
     page_number: int
     result: list["OcrServiceResponseItemInSingleItem"]
+    raw_text: str
