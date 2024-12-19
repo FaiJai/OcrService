@@ -18,20 +18,34 @@ This repository integrates the ocrmac project with a FastAPI application, provid
     cd mac_ocr
     ```
 
-2. [Optional] Create and enter a Python virtual environment:
+1. Create a .env file
+
+    ```.env
+    PYTHONPATH=src
+    ```
+
+1. [Optional] Create and enter a Python virtual environment:
 
     ```sh
     python3 -m venv venv
     source venv/bin/activate
     ```
 
-3. Install the required dependencies:
+1. Install the required dependencies:
 
     ```sh
     pip install -r requirements.txt
     ```
 
-4. Run the application:
+1. Install poppler
+
+    Homebrew
+
+    ```sh
+    brew install poppler
+    ```
+
+1. Run the application:
     ```sh
     python main.py
     ```
