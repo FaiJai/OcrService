@@ -48,7 +48,7 @@ class ImageOcrService(IOcrService):
         # Get the absolute path of this file
         current_file_path = os.path.abspath(__file__)
         os.system(
-            f'python {current_file_path} {self.temp_folder_path} {self.ocr_result_path} {" ".join(prefer_language or [])}'
+            f'{os.getenv("PYTHON_INTERPRETER", "python")} {current_file_path} {self.temp_folder_path} {self.ocr_result_path} {" ".join(prefer_language or [])}'
         )
 
     @debug_timer
